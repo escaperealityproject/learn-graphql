@@ -2,56 +2,111 @@ import { GraphQLServer } from "graphql-yoga";
 
 // Scalar types - String, Boolean, Int, Float, ID
 
+// Demo user data
+const users = [
+  {
+    id: "1",
+    name: "Andrew",
+    email: "andrew@example.com",
+    age: 27
+  },
+  {
+    id: "2",
+    name: "Sarah",
+    email: "sarah@example.com"
+  },
+  {
+    id: "3",
+    name: "Mike",
+    email: "mike@example.com"
+  }
+];
+
+const posts = [
+  {
+    id: "10",
+    title: "GraphQL 101",
+    body: "This is how to use GraphQL...",
+    published: true
+  },
+  {
+    id: "11",
+    title: "GraphQL 201",
+    body: "This is an advanced GraphQL post...",
+    published: false
+  },
+  {
+    id: "12",
+    title: "Programming Music",
+    body: "",
+    published: false
+  }
+];
+
 // Type definitions (schema)
 const typeDefs = `
     type Query {
-        greeting(name: String): String!
+        users(query: String): [User!]!
+        posts(query: String): [Post!]!
         me: User!
         post: Post!
-        add(a: Float!, b: Float!): Float! 
     }
 
     type User {
-      id: ID!
-      name: String!
-      email: String!
-      age: Int
+        id: ID!
+        name: String!
+        email: String!
+        age: Int
     }
 
     type Post {
-      id: ID!
-      title: String!
-      body: String
-      published: Boolean!
+        id: ID!
+        title: String!
+        body: String!
+        published: Boolean!
     }
 `;
 
 // Resolvers
 const resolvers = {
   Query: {
-    add(parent, args, ctx, info) {
-      return args.a + args.b;
-    },
-    greeting(parent, args, ctx, info) {
-      if (!args.name) {
-        return "Hello!!";
+    users(parent, args, ctx, info) {
+      if (!args.query) {
+        return users;
       }
-      return `hello ${args.name}`;
+
+      return users.filter(user => {
+        return user.name.toLowerCase().includes(args.query.toLowerCase());
+      });
+    },
+    posts(parent, args, ctx, info) {
+      if (!args.query) {
+        return posts;
+      }
+
+      return posts.filter(post => {
+        const isTitleMatch = post.title
+          .toLowerCase()
+          .includes(args.query.toLowerCase());
+        const isBodyMatch = post.body
+          .toLowerCase()
+          .includes(args.query.toLowerCase());
+        return isTitleMatch || isBodyMatch;
+      });
     },
     me() {
       return {
         id: "123098",
-        name: "some name",
-        email: "somemail@example.com",
-        age: 28
+        name: "Mike",
+        email: "mike@example.com"
       };
     },
     post() {
       return {
-        id: "123098",
-        title: "some title",
-        body: "Lorem Ipsum",
-        published: true
+        id: "092",
+        title: "GraphQL 101",
+        body: "",
+        published: false
       };
     }
   }
