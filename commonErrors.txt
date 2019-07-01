@@ -1,0 +1,11 @@
+################################################################################
+
+While making a mutation to delete something from a variable if error is 
+
+Cannot return null for non-nullable field Comment.id
+
+Probably returning array instead of objects as .splice returns array of objects. 
+Nothing a [0] cant fix
+
+################################################################################
+
