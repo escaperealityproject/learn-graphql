@@ -57,7 +57,7 @@ const Mutation = {
     }
     return user;
   },
-  createPost(parent, { data }, { db }, info) {
+  createPost(parent, { data }, { db, pubsub }, info) {
     const userExists = db.users.some(user => {
       return user.id === data.author;
     });
@@ -70,6 +70,9 @@ const Mutation = {
       ...data
     };
     db.posts.push(post);
+    if (data.published) {
+      pubsub.publish("post", { post });
+    }
     return post;
   },
 
@@ -97,7 +100,7 @@ const Mutation = {
     }
     return post;
   },
-  createComment(parent, { data }, { db }, info) {
+  createComment(parent, { data }, { db, pubsub }, info) {
     const postExist = db.posts.some(
       post => post.id === data.post && post.published
     );
@@ -113,6 +116,7 @@ const Mutation = {
       ...data
     };
     db.comments.push(comment);
+    pubsub.publish(`comment ${data.post}`, { comment: comment });
     return comment;
   },
   deleteComment(parent, args, { db }, info) {
