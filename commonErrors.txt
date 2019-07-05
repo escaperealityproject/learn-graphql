@@ -9,3 +9,10 @@ Nothing a [0] cant fix
 
 ################################################################################
 
+If getting
+ 
+ ▸    Could not connect to server at http://localhost:4466. Please check if your server is running.
+
+while executing prisma deploy, wait for a few seconds and execute the command again, its a common issue
+
+################################################################################
