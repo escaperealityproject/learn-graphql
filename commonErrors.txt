@@ -16,3 +16,9 @@ If getting
 while executing prisma deploy, wait for a few seconds and execute the command again, its a common issue
 
 ################################################################################
+
+(node:7995) UnhandledPromiseRejectionWarning: [object Array]
+
+while using prisma from priisma-bindings, can be a bad query with wrong arguments
+
+################################################################################
