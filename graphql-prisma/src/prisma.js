@@ -7,13 +7,6 @@ const prisma = new Prisma({
   endpoint: "http://localhost:4466"
 });
 
-// prisma.exists
-//   .Comment({
-//     id: "cjxpu449k006d0780blx3lzah",
-//     text: "Does it have this text?"
-//   })
-//   .then(exists => console.log(exists));
-
 const createPostForUser = async (authorId, data) => {
   const userExists = await prisma.exists.User({ id: authorId });
 

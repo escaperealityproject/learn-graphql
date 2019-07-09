@@ -7,4 +7,15 @@ prisma deploy
 cd ..
 npm start
 
+to kill a container
+
+get container id from
+docker ps
+then 
+docker kill (the obtained container id)
+
 use sudo with docker commands if the right permissions are not set up
+
+
+
+access playground at localhost:4466 

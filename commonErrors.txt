@@ -22,3 +22,7 @@ while executing prisma deploy, wait for a few seconds and execute the command ag
 while using prisma from priisma-bindings, can be a bad query with wrong arguments
 
 ################################################################################
+
+If cant delete an entry, chexk relationsips. Default behaviour is set null, but ! prevents that, so change it to cascade
+
+################################################################################
