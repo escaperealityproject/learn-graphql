@@ -51,3 +51,12 @@ in prisma playgrounds add http header
 }
 
 ################################################################################
+prisma delete to delete all data
+################################################################################
+
+################################################################################
+To get get-schema to work after auth
+################################################################################
+
+Create entry for prisma inside extentions in .graphqlconfig
+It will make the get-schema command to look for the file locally and not through :4466, which is protected
