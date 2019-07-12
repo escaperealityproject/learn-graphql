@@ -2,9 +2,9 @@
 For running the container
 ################################################################################
 
-cd prisma
-dockerd
-docker-compose up -d
+    cd prisma
+    dockerd
+    docker-compose up -d
 
 Access prisma GraphQL playground at localhost:4466
 
@@ -12,14 +12,14 @@ Access prisma GraphQL playground at localhost:4466
 To update the prisma for latest schema
 ################################################################################
 
-prisma deploy
+    prisma deploy
 
 ################################################################################
 To run custom node server
 ################################################################################
 
-cd ..
-npm start
+    cd ..
+    npm start
 
 Access its GraphQL playground at localhost:4000
 
