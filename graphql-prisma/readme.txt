@@ -39,3 +39,15 @@ use sudo with docker commands if the right permissions are not set up
 ################################################################################
 To get logs docker logs -f (container id) 
 ################################################################################
+
+################################################################################
+To access playgrounds with auth
+################################################################################
+
+prisma token to get a token
+in prisma playgrounds add http header
+{
+    "Authorization":"Bearer {token}"
+}
+
+################################################################################
