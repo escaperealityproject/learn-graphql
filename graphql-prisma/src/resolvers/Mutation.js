@@ -75,17 +75,79 @@ const Mutation = {
 
     return prisma.mutation.deletePost({ where: { id } }, info);
   },
-  async updatePost(parent, { id, data }, { prisma, request }, info) {
+  async updatePost(parent, args, { prisma, request }, info) {
     const userId = getUserId(request);
+    const postExists = await prisma.exists.Post({
+      id: args.id,
+      author: {
+        id: userId
+      }
+    });
+    const isPublished = await prisma.exists.Post({
+      id: args.id,
+      published: true
+    });
 
-    const postExists = await prisma.exists.Post({ id, author: { id: userId } });
     if (!postExists) {
       throw new Error("Unable to update post");
     }
-    return prisma.mutation.updatePost({ data, where: { id: id } }, info);
+
+    if (isPublished && args.data.published === false) {
+      await prisma.mutation.deleteManyComments({
+        where: { post: { id: args.id } }
+      });
+    }
+
+    return prisma.mutation.updatePost(
+      {
+        where: {
+          id: args.id
+        },
+        data: args.data
+      },
+      info
+    );
   },
-  createComment(parent, args, { prisma, request }, info) {
+  async createComment(parent, args, { prisma, request }, info) {
     const userId = getUserId(request);
+    const postExists = await prisma.exists.Post({
+      id: args.data.post,
+      published: true
+    });
+
+    if (!postExists) {
+      throw new Error("Unable to find post");
+    }
+
+    return prisma.mutation.createComment(
+      {
+        data: {
+          text: args.data.text,
+          author: {
+            connect: {
+              id: userId
+            }
+          },
+          post: {
+            connect: {
+              id: args.data.post
+            }
+          }
+        }
+      },
+      info
+    );
+  },
+  async createComment(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request);
+    const postExists = await prisma.exists.Post({
+      id: args.data.post,
+      published: true
+    });
+
+    if (!postExists) {
+      throw new Error("Unable to find post");
+    }
 
     return prisma.mutation.createComment(
       {
