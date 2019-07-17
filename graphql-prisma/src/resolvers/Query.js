@@ -5,7 +5,8 @@ const Query = {
     const opArgs = {
       first: args.first,
       skip: args.skip,
-      after: args.after
+      after: args.after,
+      orderBy: args.orderBy
     };
 
     if (args.query) {
@@ -22,10 +23,11 @@ const Query = {
   },
   posts(parent, args, { prisma }, info) {
     const opArgs = {
+      first: args.first,
+      skip: args.skip,
+      after: args.after,
+      orderBy: args.orderBy,
       where: {
-        first: args.first,
-        skip: args.skip,
-        after: args.after,
         published: true
       }
     };
@@ -46,10 +48,10 @@ const Query = {
   myPosts(parent, args, { prisma, request }, info) {
     const userId = getUserId(request);
     const opArgs = {
+      first: args.first,
+      skip: args.skip,
+      after: args.after,
       where: {
-        first: args.first,
-        skip: args.skip,
-        after: args.after,
         author: {
           id: userId
         }
@@ -71,11 +73,9 @@ const Query = {
   },
   comments(parent, args, { prisma }, info) {
     const opArgs = {
-      where: {
-        first: args.first,
-        skip: args.skip,
-        after: args.after
-      }
+      first: args.first,
+      skip: args.skip,
+      after: args.after
     };
     return prisma.query.comments(opArgs, info);
   },
