@@ -87,3 +87,26 @@ To deploy to prod
     prisma login 
 to login
 choose your server and continue, prisma.yml file will now contain the correcct address, copy it over to prod.env
+
+################################################################################
+Heroku setup
+################################################################################
+
+    npm i -g heroku
+    heroku login
+    heroku create
+(this automatically creates and sets heroku's repo and set it as remote)
+    git push heroku master
+
+################################################################################
+Heroku env variables
+################################################################################
+
+They can be set mannually through the web interface, but for cli
+    heroku config:set key=value
+
+We can run
+    heroku config
+To see all the set up environment variables
+
+################################################################################
