@@ -71,3 +71,19 @@ after changing prisma's datamodel,
     cd ..
     npm run get-schema
 To update bindings datamodel
+
+################################################################################
+To use environment variables
+################################################################################
+
+    prisma deploy -e ../config/dev.env
+
+-e to specify use of env followed by path
+
+################################################################################
+To deploy to prod
+################################################################################
+
+    prisma login 
+to login
+choose your server and continue, prisma.yml file will now contain the correcct address, copy it over to prod.env
