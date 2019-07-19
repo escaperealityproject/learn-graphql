@@ -19,7 +19,7 @@ To run custom node server
 ################################################################################
 
     cd ..
-    npm start
+    npm run dev
 
 Access its GraphQL playground at localhost:4000
 

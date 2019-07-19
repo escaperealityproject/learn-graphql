@@ -26,3 +26,8 @@ while using prisma from priisma-bindings, can be a bad query with wrong argument
 If cant delete an entry, chexk relationsips. Default behaviour is set null, but ! prevents that, so change it to cascade
 
 ################################################################################
+
+For easier environment setup, use env-cmd@8.0.2 , v9 has different requirements
+## -f fixes the problem, used for specifying file location
+
+################################################################################
