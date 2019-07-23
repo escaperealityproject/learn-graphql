@@ -18,7 +18,7 @@ services:
             schema: public
             user: vhvxndbhmzcrmj
             password: 65bc61435c35a3b2c6c5b84662cd2b63feef2852fd48c1fe3bb3144dc4755545
-            ssl: true
             rawAccess: true
-            port: '5432'
+            port: 5432
             migrations: true
+            ssl: true
