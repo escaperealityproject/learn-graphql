@@ -8,6 +8,6 @@ const server = new GraphQLServer({
   context: { axios }
 });
 
-server.start({ port: 4000 }, () => {
-  console.log("Server running on port 4000 ");
+server.start({ port: 5000 }, () => {
+  console.log("Server running on port 5000 ");
 });
