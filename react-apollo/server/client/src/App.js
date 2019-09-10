@@ -8,7 +8,7 @@ import Launch from "./components/Launch";
 import { BrowserRouter, Route } from "react-router-dom";
 
 const client = new ApolloClient({
-  uri: "http://localhost:5000"
+  uri: "/"
 });
 
 function App() {
